@@ -1,0 +1,748 @@
+/* ===========================
+   RESET & BASE
+=========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #1a1a1a;
+    color: #f4f4f4;
+    line-height: 1.6;
+    font-family: 'Poppins', sans-serif;
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+}
+
+/* ===========================
+   NAVIGATION
+=========================== */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background: rgba(17, 17, 17, 0.85);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: padding 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.logo a {
+    color: #c5a059;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.logo a:hover {
+    color: #fff;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #c5a059;
+}
+
+/* Hamburger Button */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 101;
+}
+
+.hamburger span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: #fff;
+    border-radius: 2px;
+    transition: all 0.35s ease;
+}
+
+/* Hamburger → X animation */
+.hamburger.open span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+.hamburger.open span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* ===========================
+   HERO
+=========================== */
+.hero {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* Fallback background color if image fails */
+    background-color: #222;
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                      url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=1500&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.hero-content {
+    max-width: 800px;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #ddd;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #c5a059;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(197, 160, 89, 0.35);
+}
+
+/* ===========================
+   SECTIONS
+=========================== */
+section {
+    padding: 70px 10%;
+}
+
+h2 {
+    border-bottom: 2px solid #c5a059;
+    display: inline-block;
+    margin-bottom: 30px;
+    padding-bottom: 6px;
+}
+
+/* ===========================
+   SERVICES / PRICE TABLE
+=========================== */
+.price-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.price-table td {
+    padding: 15px;
+    border-bottom: 1px solid #333;
+}
+
+.price-table td:last-child {
+    text-align: right;
+    color: #c5a059;
+    font-weight: bold;
+}
+
+/* ===========================
+   GALLERY
+=========================== */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    height: 300px;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
+}
+
+.gallery-item:hover {
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+}
+
+.haircut-img {
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item:hover .haircut-img {
+    transform: scale(1.1);
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .overlay {
+    opacity: 1;
+}
+
+.overlay h3 {
+    color: #c5a059;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.fade        { background-image: url('images/fade.jpg'); }
+.pompadour   { background-image: url('images/pompadour.jpg'); }
+.buzz        { background-image: url('images/buzz.jpg'); }
+.beard-line  { background-image: url('images/beard.jpg'); }
+
+/* ===========================
+   PRODUCTS
+=========================== */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    background: #222;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    background: #2a2a2a;
+}
+
+.product-img {
+    height: 150px;
+    background: #2d2d2d;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #3a3a3a;
+}
+
+.product-icon {
+    font-size: 3rem;
+}
+
+.price {
+    display: block;
+    margin-top: 10px;
+    color: #c5a059;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* ===========================
+   CONTACT
+=========================== */
+.contact-section {
+    padding: 70px 10%;
+}
+
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 30px;
+    background: #222;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.info-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.info-item .icon {
+    font-size: 1.5rem;
+    background: #333;
+    padding: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.info-item h4 {
+    color: #c5a059;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.info-item a,
+.info-item p {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.info-item a:hover {
+    color: #c5a059;
+}
+
+.map-box {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #333;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+footer {
+    text-align: center;
+    padding: 30px;
+    background: #111;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* ===========================
+   REVEAL ANIMATION
+=========================== */
+.reveal {
+    position: relative;
+    transform: translateY(50px);
+    opacity: 0;
+    transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+}
+
+.reveal.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* ===========================
+   NAV ANIMATION
+=========================== */
+nav {
+    animation: fadeInDown 1s ease;
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mobileFadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===========================
+   MOBILE RESPONSIVE
+=========================== */
+@media (max-width: 768px) {
+
+    /* Nav: show hamburger, hide links by default */
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(17, 17, 17, 0.97);
+        padding: 10px 0 20px;
+        border-top: 1px solid #333;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-links li {
+        width: 100%;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 14px 5%;
+        border-bottom: 1px solid #222;
+    }
+
+    /* Hero */
+    .hero {
+        height: 70vh;
+        background-attachment: scroll;
+        background-position: center;
+        box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
+    }
+
+    .hero-content {
+        animation: mobileFadeUp 1.2s ease;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+        padding: 0 10px;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    /* Sections */
+    section {
+        padding: 40px 5%;
+    }
+
+    .contact-section {
+        padding: 40px 5%;
+    }
+
+    /* Price table */
+    .price-table td {
+        padding: 10px 5px;
+        font-size: 0.9rem;
+    }
+
+    /* Gallery */
+    .gallery-item {
+        height: 250px;
+    }
+
+    /* Contact */
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===========================
+   SECTION SUBTITLE
+=========================== */
+.section-subtitle {
+    color: #aaa;
+    font-size: 1rem;
+    margin-top: -18px;
+    margin-bottom: 35px;
+    max-width: 600px;
+}
+
+/* ===========================
+   TEAM SECTION
+=========================== */
+.team-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.barber-card {
+    display: flex;
+    gap: 30px;
+    background: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    border-radius: 14px;
+    padding: 28px;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.barber-card:hover {
+    border-color: #c5a059;
+    transform: translateX(6px);
+}
+
+.barber-avatar {
+    flex-shrink: 0;
+}
+
+.avatar-placeholder {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c5a059, #8b6d32);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.barber-info h3 {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+    color: #fff;
+}
+
+.barber-title {
+    display: inline-block;
+    color: #c5a059;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.barber-info p {
+    color: #bbb;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+.barber-specialties {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    background: #2a2a2a;
+    border: 1px solid #3a3a3a;
+    color: #c5a059;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+}
+
+/* ===========================
+   TESTIMONIALS SECTION
+=========================== */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.testimonial-card {
+    background: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    border-radius: 14px;
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+    position: relative;
+}
+
+.testimonial-card::before {
+    content: '"';
+    position: absolute;
+    top: 14px;
+    right: 22px;
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    color: #c5a059;
+    opacity: 0.15;
+    line-height: 1;
+}
+
+.testimonial-card:hover {
+    border-color: #c5a059;
+    transform: translateY(-4px);
+}
+
+.stars {
+    color: #c5a059;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+}
+
+.review-text {
+    color: #ccc;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    font-style: italic;
+    flex: 1;
+}
+
+.reviewer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-top: 1px solid #2a2a2a;
+    padding-top: 16px;
+}
+
+.reviewer-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
+    border: 1px solid #c5a059;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #c5a059;
+    flex-shrink: 0;
+    letter-spacing: 0.5px;
+}
+
+.reviewer strong {
+    display: block;
+    font-size: 0.9rem;
+    color: #fff;
+}
+
+.reviewer span {
+    font-size: 0.78rem;
+    color: #888;
+}
+
+/* ===========================
+   FLOATING WHATSAPP BUTTON
+=========================== */
+.whatsapp-float {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 999;
+    background: #25D366;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.4);
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 0.3s ease,
+                padding 0.3s ease;
+    animation: floatIn 0.8s ease 1.5s both;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.07) translateY(-2px);
+    box-shadow: 0 12px 32px rgba(37, 211, 102, 0.55);
+}
+
+.whatsapp-label {
+    white-space: nowrap;
+}
+
+@keyframes floatIn {
+    from { opacity: 0; transform: translateY(30px) scale(0.8); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ===========================
+   MOBILE — NEW SECTIONS
+=========================== */
+@media (max-width: 768px) {
+    .barber-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 22px;
+    }
+
+    .barber-card:hover {
+        transform: none;
+    }
+
+    .barber-specialties {
+        justify-content: center;
+    }
+
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Collapse label on mobile — show icon only */
+    .whatsapp-label {
+        display: none;
+    }
+
+    .whatsapp-float {
+        padding: 14px;
+        border-radius: 50%;
+        bottom: 20px;
+        right: 20px;
+    }
+}
