@@ -78,7 +78,7 @@ const initMobileParallax = () => {
 
     window.addEventListener('scroll', () => {
         if (window.innerWidth < 768) {
-            hero.style.backgroundPositionY = `${window.scrollY * 0.4}px`;
+            hero.style.backgroundPositionY = `calc(50% + ${window.scrollY * 0.4}px)`;
         }
     });
 };
